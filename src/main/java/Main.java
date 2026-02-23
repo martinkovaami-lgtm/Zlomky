@@ -38,6 +38,8 @@ public class Main {
         Zlomek prumer = prumer(pole);
         IO.println("prumer je %s ".formatted(prumer.zkratit()));
 
+        int celeCislo = new Zlomek(25,12).intValue();
+        IO.println("Zlomek na cele cislo :  %d".formatted(celeCislo));
 
     }
 
