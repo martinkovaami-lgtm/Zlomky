@@ -56,16 +56,21 @@ public class Zlomek {
         int cit = citatel * druhy.jmenovatel + druhy.citatel * jmenovatel;
         return new Zlomek(cit, jm);
     }
+    /*
     public Zlomek plus(int cislo) {
         int jm = jmenovatel * druhy.jmenovatel;
         int cit = citatel * druhy.jmenovatel + druhy.citatel * jmenovatel;
         return new Zlomek(cit, jm);
     }
+    */
 
+    /**
     //pretizene plus pro pretizeni celeho cisla ke zlomku
     public Zlomek plus(int cislo){
         int cit= citatel + jmenovatel * cislo;
     }
+
+     */
 
     //kraceni
     public Zlomek zkratit() {
