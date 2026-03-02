@@ -7,6 +7,8 @@ public class Zlomek extends Number{
     private int jmenovatel;
 
     public Zlomek() {
+        this.citatel = 0;
+        jmenovatel = 0;
     }
 
     @Override
@@ -56,7 +58,7 @@ public class Zlomek extends Number{
     public void setJmenovatel(int jmenovatel) {
 
         this.jmenovatel = jmenovatel;
-        ;
+
     }
 
     @Override

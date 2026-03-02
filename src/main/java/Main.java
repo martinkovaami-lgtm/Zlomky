@@ -29,7 +29,7 @@ public class Main {
         Zlomek[] pole = new Zlomek[]{
                 new Zlomek(1, 3),
                 new Zlomek(1, 2),
-               new Zlomek(6, 5),
+                new Zlomek(6, 5),
                 new Zlomek(4, 3),
                 new Zlomek(7, 8),
                 new Zlomek(13, 10),
@@ -44,9 +44,9 @@ public class Main {
     }
 
     private static Zlomek prumer(Zlomek[] pole) {
-        var soucet = new Zlomek();//nulovy zlomek
+        var soucet = new Zlomek(0,1);//nulovy zlomek
         for (var z : pole) {
-            soucet.plus(z);
+            soucet = soucet.plus(z);
 
         }
         var pocet = new Zlomek(pole.length, 1);
