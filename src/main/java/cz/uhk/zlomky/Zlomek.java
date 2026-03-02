@@ -32,7 +32,7 @@ public class Zlomek extends Number{
     }
 
     public Zlomek(int citatel, int jmenovatel) {
-        this.citatel = citatel;
+        this.citatel = citatel;//konstruktor
         this.jmenovatel = jmenovatel;
     }
 
