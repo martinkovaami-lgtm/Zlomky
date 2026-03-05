@@ -13,6 +13,7 @@ public class SpojovySeznam<E> implements Seznam<E> {
         var novy = new PrvekSeznamu<E>(hodnota);
         if (prvni == null) {
             //seznam je prazny a pridame prvni hodnotu
+
             prvni = posledni = novy;
         } else {
             posledni.dalsi = novy;
@@ -20,6 +21,39 @@ public class SpojovySeznam<E> implements Seznam<E> {
         }
 
     }
+    // PŘIDÁNO: Přetížená metoda
+    public void pridej(E hodnota, int index) {
+        if (index <= 0) {
+            // Přidání na úplný začátek seznamu
+            var novy = new PrvekSeznamu<E>(hodnota);
+            novy.dalsi = prvni;
+            prvni = novy;
+            // Pokud byl seznam prázdný, musíme aktualizovat i ukazatel posledni
+            if (posledni == null) {
+                posledni = novy;
+            }
+        } else {
+            // Najdeme prvek těsně PŘED požadovanou pozicí
+            var predchozi = vratPrvek(index - 1);
+
+            if (predchozi == null) {
+                // index je mimo rozsah (větší než velikost seznamu),
+                // prvek prostě přidáme na konec pomocí již hotové metody
+                pridej(hodnota);
+            } else {
+                // Přidání doprostřed nebo na konec
+                var novy = new PrvekSeznamu<E>(hodnota);
+                novy.dalsi = predchozi.dalsi;
+                predchozi.dalsi = novy;
+
+                // Pokud jsme přidali úplně na konec, posuneme ukazatel
+                if (novy.dalsi == null) {
+                    posledni = novy;
+                }
+            }
+        }
+    }
+
 
     @Override
     public void smaz(int pozice) {

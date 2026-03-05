@@ -22,6 +22,30 @@ class SpojovySeznamTest {
     }
 
     @Test
+    @DisplayName("Přidání prvku na konkrétní index")
+    void pridejNaIndex() {
+        initData(); // Vytvoří seznam s prvky 10, 20, 30, 40 (celkem 4 prvky)
+
+        // 1. Přidání doprostřed (na index 2)
+        seznam.pridej(25, 2);
+        assertEquals(5, seznam.pocet());
+        assertEquals(20, seznam.vrat(1));
+        assertEquals(25, seznam.vrat(2)); // Nový prvek
+        assertEquals(30, seznam.vrat(3)); // Původní prvek se posunul
+
+        // 2. Přidání na úplný začátek (index 0)
+        seznam.pridej(5, 0);
+        assertEquals(6, seznam.pocet());
+        assertEquals(5, seznam.vrat(0)); // Nový prvek
+        assertEquals(10, seznam.vrat(1)); // Původní první prvek
+
+        // 3. Přidání na konec seznamu (index 6, protože teď máme 6 prvků)
+        seznam.pridej(50, seznam.pocet());
+        assertEquals(7, seznam.pocet());
+        assertEquals(50, seznam.vrat(6)); // Úplně poslední prvek
+    }
+
+    @Test
     void smaz() {
         initData();
         seznam.smaz(1);
