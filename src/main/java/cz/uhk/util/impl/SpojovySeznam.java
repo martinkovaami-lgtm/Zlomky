@@ -11,36 +11,52 @@ public class SpojovySeznam<E> implements Seznam<E> {
     @Override
     public void pridej(E hodnota) {
         var novy = new PrvekSeznamu<E>(hodnota);
-        if (prvni==null){
+        if (prvni == null) {
             //seznam je prazny a pridame prvni hodnotu
-            prvni=posledni=novy;
+            prvni = posledni = novy;
         } else {
-            posledni.dalsi=novy;
+            posledni.dalsi = novy;
+            posledni = posledni.dalsi;
         }
 
     }
 
     @Override
     public void smaz(int pozice) {
-        if (pozice==0){
-            prvni=prvni.dalsi;
-        }else{
-            var pom=vratPrvek(pozice-1);
-            pom.dalsi=pom.dalsi.dalsi;
+        if (pozice == 0) {
+            prvni = prvni.dalsi;
+        } else {
+            var predchozi = vratPrvek(pozice - 1);
+            if (predchozi != null && predchozi.dalsi != null)
+                predchozi.dalsi = predchozi.dalsi.dalsi;
         }
 
     }
 
     @Override
     public E vrat(int pozice) {
-
-        return vratPrvek(pozice).hodnota;
+        if (pozice < 0) {
+            return null;
+        }
+        var pom = prvni;
+        for (int i = 0; i < pozice && pom != null; i++) {
+            pom = pom.dalsi;
+        }
+        return (pom != null) ? pom.hodnota : null;
     }
 
+    /* public E vrat(int pozice) {
+        if ( pozice< 0)
+           PrvekSeznamu <E> prvek = vratPrvek(pozice);
+        return (pom != null) ? pom.hodnota : null;
+    }
+     */
     private PrvekSeznamu<E> vratPrvek(int pozice) {
+        if (pozice < 0) {
+            return null;
+        }
         var pom = prvni;
-        //for (int i=0; i<pozice && pom!= null;i++, pom= pom.dalsi);
-        for (int i=0; i<pozice && pom!= null;i++) {
+        for (int i = 0; i < pozice && pom != null; i++) {
             pom = pom.dalsi;
         }
         return pom;
@@ -48,28 +64,32 @@ public class SpojovySeznam<E> implements Seznam<E> {
 
     @Override
     public int pocet() {
-        var pom =prvni;
-        int pocet=0;
-        while (pom !=null){
-            pom=pom.dalsi;
-            pocet++;
+        var pom = prvni;
+        var pocet = 0;
+        for (; pom != null; pocet++) {
+            pom = pom.dalsi;
         }
-        return 0;
+        // for (var pom = prvni ;pom != null; pocet++; pom = pom.dalsi); --> lze to i takto na jedn radek, aniz by for cyklus neco delal
+        return pocet;
     }
 
-    public Iterator<E> iterator(){
+    @Override
+    public Iterator<E> iterator() {
         return new Iterator<E>() {
             PrvekSeznamu<E> aktualni = prvni;
 
+            @Override
             public boolean hasNext() {
-                return aktualni.dalsi != null;
+                return aktualni != null && aktualni.dalsi != null;
             }
 
             @Override
             public E next() {
-                return null;
+                if (aktualni == null) return null;
+                aktualni = aktualni.dalsi;
+                return (aktualni != null) ? aktualni.hodnota : null;
             }
-        }
+        };
     }
 }
 //typ prvku ve spoj. seznamu s hodnotou zatim neznameho typu
@@ -80,4 +100,4 @@ class PrvekSeznamu <E> {
     public PrvekSeznamu(E hodnota) {
         this.hodnota=hodnota;
     }
-}
+    }

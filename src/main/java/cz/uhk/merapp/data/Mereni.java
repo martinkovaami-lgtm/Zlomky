@@ -13,9 +13,8 @@ public class Mereni {
 
     public Number secist(){
         Number soucet = 0;
-        for (int i = 0; i<data.pocet(){
-            var cislo= data.vrat(0);
-            soucet=soucet.doubleValue() + cislo.doubleValue();
+        for (var cislo : data) {
+            soucet = soucet.doubleValue() + cislo.doubleValue();
         }
         return soucet;
     }
@@ -25,7 +24,7 @@ public class Mereni {
     }
 
     public Number max(){
-        Number max = data.vrat(0)
+        Number max = data.vrat(0);
         for(Number cislo: data){
             if (cislo.doubleValue()>max.doubleValue())
                 max=cislo;

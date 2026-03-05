@@ -27,6 +27,15 @@ class SpojovySeznamTest {
         seznam.smaz(1);
         assertEquals(3, seznam.pocet());
         assertEquals(30, seznam.vrat(1));
+        seznam.smaz(3);
+        assertEquals(3, seznam.pocet());
+    }
+
+    @Test
+    void smazMimo() {
+        initData();
+        seznam.smaz(-1);
+        assertEquals(4, seznam.pocet());
     }
 
     private void initData() {
@@ -43,6 +52,10 @@ class SpojovySeznamTest {
         assertEquals(10, seznam.vrat(0));
         assertEquals(20, seznam.vrat(1));
         assertEquals(40, seznam.vrat(seznam.pocet()-1));
+
+        assertNull(seznam.vrat(100), "pozice mimo rozsah seznamu");
+        assertNull(seznam.vrat(-100), "pozice mimo rozsah seznamu");
+
 
     }
 
